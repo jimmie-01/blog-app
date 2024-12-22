@@ -13,7 +13,7 @@ router.post('/register', async(req, res) => {
 	//Register Credential Validation
 	const Validation = registerValidation(req.body);
 	if (Validation.error){
-		return res.status(400).send(Validation.error.details[0].message);
+		return res.status(400).render('register', { error: Validation.error.details[0].message });
 	};
 
 	//Check if user already exists
@@ -38,12 +38,31 @@ router.post('/register', async(req, res) => {
 	}
 });
 
+router.get('/index', (req, res) => {
+	res.render('index');
+});
+
 router.get('/login', (req,res) => {
 	res.render('login');
 });
 
-router.post('/login', (req, res) => {
-	
-})
+//Login
+router.post('/login', async(req, res) => {
+	// Validate User Credentials
+	const Validation = loginValidation(req.body);
+	if (Validation.error){
+		return res.status(400).render('login', { error: Validation.error.details[0].message });
+	};
+
+	//Authenticate user Email
+	const user = await User.findOne({ email: req.body.email });
+	if(!user) return res.status(400).send('Incorrect Email or password');
+	// Verify password
+	const validPassword = await bcrypt.compare(req.body.password, user.password);
+	if(!validPassword) return res.status(400).send('Password Incorrect');
+
+	res.render('index');
+});
+
 
 module.exports = router;
