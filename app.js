@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const authRoute = require('./routes/auth');
+const postRoute = require('./routes/post');
 
 const app = express();
 
@@ -9,6 +10,7 @@ dotenv.config();
 
 //middleware
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 //E
 app.set('view engine', 'ejs');
@@ -22,6 +24,9 @@ mongoose.connect(dbURI)
 
 // Authentication Route
 app.use('/', authRoute);
+
+//Post Routes
+app.use('/', postRoute);
 
 app.get('/', (req, res) => {
 	res.render('index');
