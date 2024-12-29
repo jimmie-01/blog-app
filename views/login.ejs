@@ -1,13 +1,28 @@
-<h1>LOGIN</h1>
+<%- include('partials/header'); -%>
+
 <form action="/login" method="post">
-	<div>
-		<label for="email">Email</label>
-		<input type="email" id="email" name="email" required>
-	</div>
-	<div>
-		<label for="password">Password</label>
-		<input type="password" id="password" name="password" required>
-	</div>
-	<button type="submit">Login</button>
+  <h2>Login</h2>
+  <label for="email">Email</label>
+  <input type="text" name="email" required />
+  <div class="email error"></div>
+  <label for="password">Password</label>
+  <input type="password" name="password" required />
+  <div class="password error"></div>
+  <button>login</button>
 </form>
-<a href="/register">Register</a>
+
+<%- include('partials/footer'); -%>
+<!-- 
+<script>
+  const form = document.querySelector('form');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // get values
+    const email = form.email.value;
+    const password = form.password.value;
+
+    console.log(email, password);
+  });
+</script> -->
