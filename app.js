@@ -29,6 +29,8 @@ app.set('view engine', 'ejs');
 app.get('/', (req, res) => {
 	res.render('home');
 });
-
+app.get('/blogs', (req, res) => {
+	res.render('blogs');
+})
 //Authentication Route
 app.use(authRoute);
