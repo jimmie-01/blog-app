@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const authRoute = require('./routes/authRoute');
 const cookieParser = require('cookie-parser');
-const { verifyRoute } = require('./middleware/authMiddleware');
+const { verifyRoute, checkUser } = require('./middleware/authMiddleware');
 
 dotenv.config();
 
@@ -26,6 +26,7 @@ mongoose.connect(dbURI)
 //Set view engine
 app.set('view engine', 'ejs');
 
+app.get('*', checkUser);
 //Route
 app.get('/', (req, res) => {
 	res.render('home');
