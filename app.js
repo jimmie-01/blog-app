@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const authRoute = require('./routes/authRoute');
 const cookieParser = require('cookie-parser');
+const { verifyRoute } = require('./middleware/authMiddleware');
 
 dotenv.config();
 
@@ -29,7 +30,7 @@ app.set('view engine', 'ejs');
 app.get('/', (req, res) => {
 	res.render('home');
 });
-app.get('/blogs', (req, res) => {
+app.get('/blogs', verifyRoute, (req, res) => {
 	res.render('blogs');
 })
 //Authentication Route
