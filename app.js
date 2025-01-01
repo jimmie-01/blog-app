@@ -1,28 +1,38 @@
 const express = require('express');
-const dotenv = require('dotenv');
 const mongoose = require('mongoose');
-const authRoute = require('./routes/auth');
-
-const app = express();
+const dotenv = require('dotenv');
+const authRoute = require('./routes/authRoute');
+const cookieParser = require('cookie-parser');
+const { verifyRoute, checkUser } = require('./middleware/authMiddleware');
 
 dotenv.config();
 
-//middleware
-app.use(express.urlencoded({ extended: false }));
+const app = express();
 
-//E
-app.set('view engine', 'ejs');
-app.set('views', 'views')
+//Middleware
+app.use(express.static('public'));
+app.use(express.urlencoded({ extended: false}));
+app.use(express.json());
+app.use(cookieParser());
 
-//connect to DataBase
+// Connect to db
 const dbURI = process.env.DB_CONNECT;
 mongoose.connect(dbURI)
-	.then(result => app.listen(3000, 'localhost'))
-	.catch(err => console.log(err));
+	.then((result) => app.listen(3000, 'localhost'))
+	.catch((err) => console.log(err));
 
-// Authentication Route
-app.use('/', authRoute);
 
+
+//Set view engine
+app.set('view engine', 'ejs');
+
+app.get('*', checkUser);
+//Route
 app.get('/', (req, res) => {
-	res.render('index');
+	res.render('home');
+});
+app.get('/blogs', verifyRoute, (req, res) => {
+	res.render('blogs');
 })
+//Authentication Route
+app.use(authRoute);
