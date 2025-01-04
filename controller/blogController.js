@@ -13,6 +13,17 @@ module.exports.get_create = (req, res) => {
 	res.render('create', { title: 'Create A New Blog' });
 };
 
+module.exports.get_details = (req, res) => {
+	const id = req.params.id;
+
+	Blog.findById(id)
+		.then(result => {
+			res.render('details', { blog: result, title: 'Blog Details'});
+		}).catch(err => {
+			console.log(err);
+		});
+};
+
 module.exports.get_about = (req, res) => {
 	res.render('about', { title: 'About Page' });
 };
@@ -23,6 +34,17 @@ module.exports.post_create = (req, res) => {
 	blog.save()
 		.then(result => {
 			res.redirect('/blogs');
+		}).catch(err => {
+			console.log(err);
+		});
+};
+
+module.exports.delete_blog = (req, res) => {
+	const id = req.params.id;
+
+	Blog.findByIdAndDelete(id)
+		.then(result => {
+			res.json({ redirect: '/blogs' });
 		}).catch(err => {
 			console.log(err);
 		});
