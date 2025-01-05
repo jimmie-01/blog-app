@@ -1,5 +1,20 @@
-<%- include('partials/header') %>
-
-	<h2>You are welcome to create blogs here </h2>
-	
-<%- include('partials/footer') %>
+<html lang="en">
+	<%- include('blog-partials/header') %>
+	<body>
+		<%- include('blog-partials/nav') %>
+		<div class="blogs content">
+			<h2>All Blogs</h2>
+			<% if (blogs.length > 0) { %>
+				<% blogs.forEach(blog => { %>
+					<a class="single" href='/blogs/<%=blog._id %>'>
+						<h3 class="title"><%=blog.title %></h3>
+						<p class="snippet"><%=blog.snippet %></p>
+					</a>
+				<% }) %>
+			<% } else { %>
+				<p> There are no blogs to diaplay....</p>
+			<% } %>
+		</div>
+		<%- include('blog-partials/footer') %>
+	</body>
+</html>
