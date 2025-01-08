@@ -49,3 +49,29 @@ module.exports.delete_blog = (req, res) => {
 			console.log(err);
 		});
 };
+
+module.exports.get_update_blog = (req, res) => {
+	const id = req.params.id;
+
+	Blog.findById(id)
+		.then(result => {
+			res.render('edit', { title: "Edit Blog Post", blog: result });
+		}).catch(error => {
+			res.status(500).send('Error Fetching Blog Post');
+		});
+};
+
+module.exports.update_blog = (req, res) => {
+	const id = req.params.id;
+
+	Blog.findByIdAndUpdate(id, {
+		title: req.body.title,
+		snippet: req.body.snippet,
+		body: req.body.body
+	})
+		.then(result => {
+			res.redirect(`/blogs/${id}`);
+		}).catch(err => {
+			res.status(500).send('Error Updating Blog Post');
+		});
+};

@@ -43,11 +43,11 @@ const createToken = (id) => {
 
 // controller functions
 module.exports.signup_get = (req, res) => {
-	res.render('signup');
+	res.render('admin/signup');
   };
   
 module.exports.login_get = (req, res) => {
-	res.render('login');
+	res.render('admin/login');
   };
   
 module.exports.signup_post =  async (req, res) => {

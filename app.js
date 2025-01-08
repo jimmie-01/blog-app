@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const { checkUser } = require('./middleware/authMiddleware');
 const authRoute = require('./routes/authRoute');
@@ -15,6 +16,7 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false}));
 app.use(express.json());
 app.use(cookieParser());
+app.use(methodOverride('_method'));
 
 // Connect to db
 const dbURI = process.env.DB_CONNECT;

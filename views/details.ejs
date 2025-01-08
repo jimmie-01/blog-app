@@ -9,6 +9,9 @@
 				<div class="content">
 					<p><%= blog.body %></p>
 				</div>
+				<a href="/blog/<%= blog._id%>/update" class="edit_blog">
+					<img width="40" height="40" src="../public/edit_icon.png" alt="edit_icon"/>
+				</a>
 				<a class="delete" data-doc="<%= blog._id %>">
 					<img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/filled-trash.png" alt="filled-trash"/>
 				</a>
