@@ -32,9 +32,5 @@ app.set('views', 'views');
 
 app.get('*', checkUser);
 //Route
-app.get('/', (req, res) => {
-	res.render('home');
-});
-
 app.use(authRoute);
 app.use(blogRoute);

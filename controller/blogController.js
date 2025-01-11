@@ -1,5 +1,14 @@
 const Blog = require('../model/blogs');
 
+module.exports.get_home_page = async(req, res) => {
+	try {
+		const blogs = await Blog.find().sort({ createdAt: -1 });
+		res.render('home', { title: 'Home Page', blogs });
+	} catch (error) {
+		console.log(error);
+	};
+};
+
 module.exports.get_allBlogs = (req, res) => {
 	Blog.find().sort({ createdAt: -1 })
 		.then(result => {
