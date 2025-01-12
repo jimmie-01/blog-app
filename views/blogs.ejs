@@ -4,16 +4,21 @@
 		<%- include('blog-partials/nav') %>
 		<div class="blogs content">
 			<h2>All Blogs</h2>
-			<% if (blogs.length > 0) { %>
-				<% blogs.forEach(blog => { %>
-					<a class="single" href='/blogs/<%=blog._id %>'>
-						<h3 class="title"><%=blog.title %></h3>
-						<p class="snippet"><%=blog.snippet %></p>
-					</a>
-				<% }) %>
-			<% } else { %>
-				<p> There are no blogs to diaplay....</p>
-			<% } %>
+			<ul class="blog_ul">
+				<% if (blogs.length > 0) { %>
+					<% blogs.forEach(blog => { %>
+						<li>
+							<a class="single" href='/blogs/<%=blog._id %>'>
+								<h3 class="title"><%=blog.title %></h3>
+								<p class="snippet"><%=blog.snippet %></p>
+								<span class="blog_date"><%= blog.createdAt.toDateString() %></span>
+							</a>
+						</li>
+					<% }) %>
+				<% } else { %>
+					<p> There are no blogs to diaplay....</p>
+				<% } %>
+			</ul>
 		</div>
 		<%- include('blog-partials/footer') %>
 	</body>

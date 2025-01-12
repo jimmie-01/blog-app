@@ -1,25 +1,14 @@
 <%- include('partials/header'); -%>
 
-<div class="author">
-	<h1 class="author__heading">Hi, I am Razaq.</h1>
-	<p class="author__body">Backend Software Engineer</p>
-</div>
-
-<img src="dev-tech.jpg" alt="" class="hero-image" width="981" height="528">
-
-<section class="articles">
-	<h2 class="articles__heading">Lastest Posts</h2>
-
-	<ul class="article-ul">
-		<% blogs.forEach(blog => {%>
-			<li>
-				<a href="/blogs/<%= blog._id %>">
-					<span><%= blog.title %></span>
-					<span class="article-list__date"><%= blog.createdAt.toDateString() %></span>
-				</a>
-			</li>
-		<% })%>
-	</ul>
-</section>
+ <header>
+	<div class="author">
+	  <img src="/dev-tech.jpg" alt="">
+	</div>
+	<div class="author__headings">
+	  <h2>Hi, I am Razaq.</h2>
+	  <h3>A Software Engineer (Backend)</h3>
+	  <a href="/blogs" class="btn">View Blogs</a>
+	</div>
+  </header>
 
 <%- include('partials/footer'); -%>
