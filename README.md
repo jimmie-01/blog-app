@@ -22,7 +22,7 @@
 * MongoDB installed and install mongoose as a dependency( better yet you can register on atlas to use a remote database).
 
 ## Steps to run application locally
-1. Clone th repository:
+1. Clone the repository:
 ```sh
 $ git clone https://github.com/jimmie-01/blog-app.git
 ```
